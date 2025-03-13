@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts - Alumni Management</title>
+    <link rel="stylesheet" href="{% static 'contacts/stylescontact.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="{% static 'contacts/logo1.png' %}" alt="Logo Alumni Management" width="150">
+        </div>
+
+        <h1>Kontak Kami</h1>
+        <p>Silakan hubungi kami untuk informasi lebih lanjut mengenai layanan dan produk kami.</p>
+
+        <!-- Informasi Kontak Owner -->
+        <div class="contact-info">
+            <h2>Informasi Pemilik</h2>
+            <p><strong>Nama:</strong> Hafish Arrusal</p>
+            <p><strong>Nomor HP:</strong> +62 857-3445-5432</p>
+            <p><strong>Email:</strong> hafisharrusal77@gmail.com</p>
+            <p><strong>Alamat:</strong> Jl. Soekarno Hatta No.10, Rajabasa Raya, Kota Bandar Lampung</p>
+        </div>
+
+        <div class="button-container">
+            <a href="/" class="btn">Home</a>
+            <a href="/about" class="btn">About</a>
+        </div>
+
+        <!-- Formulir Kontak -->
+        <form>
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Pesan:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+
+    <!-- Copyright -->
+    <footer>
+        <p>&copy; 2025 Alumni Management System. Semua Hak Dilindungi.</p>
+    </footer>
+</body>
+</html>

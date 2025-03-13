@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Management System</title>
+    <link rel="stylesheet" href="{% static 'alumni_app/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Tambahkan logo di sini -->
+        <img src="{% static 'alumni_app/logo2.png' %}" alt="Logo Alumni Management System" class="logo">
+        
+        <h1>Alumni Management System</h1>
+        <p>Tempat untuk tetap terhubung dengan rekan alumni dan berbagi pengalaman.</p>
+        
+        <div class="button-container">
+            <a href="/about" class="btn">About</a>
+            <a href="/contacts" class="btn">Contact</a>
+        </div>
+    </div>
+</body>
+</html>
