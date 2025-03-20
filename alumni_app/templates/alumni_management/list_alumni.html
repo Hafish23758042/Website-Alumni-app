@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Alumni</title>
+</head>
+<body>
+    <h2>Daftar Alumni</h2>
+    <a href="{% url 'add_alumni' %}">Tambah Alumni</a>
+    <table border="1">
+        <tr>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Tahun Lulus</th>
+            <th>Jurusan</th>
+            <th>Posisi</th>
+            <th>Perusahaan</th>
+            <th>Aksi</th>
+        </tr>
+        {% for alumni in alumni_list %}
+        <tr>
+            <td>{{ alumni.name }}</td>
+            <td>{{ alumni.email }}</td>
+            <td>{{ alumni.graduation_year }}</td>
+            <td>{{ alumni.major }}</td>
+            <td>{{ alumni.job_position }}</td>
+            <td>{{ alumni.company }}</td>
+            <td>
+                <a href="{% url 'edit_alumni' alumni.id %}">Edit</a> |
+                <a href="{% url 'delete_alumni' alumni.id %}">Hapus</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
