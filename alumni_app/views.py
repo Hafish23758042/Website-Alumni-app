@@ -1,42 +1,41 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render
 from .models import Alumni
 from .forms import AlumniForm
 
+# Home View
 def home(request):
     return render(request, 'alumni_management/home.html')
 
-# Create (Tambah data alumni)
-def add_alumni(request):
-    if request.method == "POST":
-        form = AlumniForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list_alumni')
-    else:
-        form = AlumniForm()
-    return render(request, 'alumni_management/add_alumni.html', {'form': form})
+# List Alumni (Menampilkan daftar alumni)
+class AlumniListView(ListView):
+    model = Alumni
+    template_name = "alumni_management/list_alumni.html"
+    context_object_name = "alumni_list"
 
-# Read (Menampilkan daftar alumni)
-def list_alumni(request):
-    alumni_list = Alumni.objects.all()
-    return render(request, 'alumni_management/list_alumni.html', {'alumni_list': alumni_list})
+# Detail Alumni (Menampilkan detail data alumni)
+class AlumniDetailView(DetailView):
+    model = Alumni
+    template_name = "alumni_management/detail_alumni.html"
+    context_object_name = "alumni"
 
-# Update (Edit data alumni)
-def edit_alumni(request, id):
-    alumni = get_object_or_404(Alumni, id=id)
-    if request.method == "POST":
-        form = AlumniForm(request.POST, instance=alumni)
-        if form.is_valid():
-            form.save()
-            return redirect('list_alumni')
-    else:
-        form = AlumniForm(instance=alumni)
-    return render(request, 'alumni_management/edit_alumni.html', {'form': form})
+# Create Alumni (Tambah data alumni)
+class AlumniCreateView(CreateView):
+    model = Alumni
+    form_class = AlumniForm
+    template_name = "alumni_management/add_alumni.html"
+    success_url = reverse_lazy('list_alumni')
 
-# Delete (Hapus data alumni)
-def delete_alumni(request, id):
-    alumni = get_object_or_404(Alumni, id=id)
-    if request.method == "POST":
-        alumni.delete()
-        return redirect('list_alumni')
-    return render(request, 'alumni_management/delete_alumni.html', {'alumni': alumni})
+# Update Alumni (Edit data alumni)
+class AlumniUpdateView(UpdateView):
+    model = Alumni
+    form_class = AlumniForm
+    template_name = "alumni_management/edit_alumni.html"
+    success_url = reverse_lazy('list_alumni')
+
+# Delete Alumni (Hapus data alumni)
+class AlumniDeleteView(DeleteView):
+    model = Alumni
+    template_name = "alumni_management/delete_alumni.html"
+    success_url = reverse_lazy('list_alumni')

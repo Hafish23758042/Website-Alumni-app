@@ -1,10 +1,13 @@
 from django.urls import path
-from . import views  # Pastikan ini benar
+from .views import (
+    home, AlumniListView, AlumniDetailView, AlumniCreateView, AlumniUpdateView, AlumniDeleteView
+)
 
 urlpatterns = [
-    path('', views.home, name='home'),  
-    path('add/', views.add_alumni, name='add_alumni'),
-    path('list/', views.list_alumni, name='list_alumni'),
-    path('edit/<int:id>/', views.edit_alumni, name='edit_alumni'),
-    path('delete/<int:id>/', views.delete_alumni, name='delete_alumni'),
+    path('', home, name='home'),
+    path('alumni/', AlumniListView.as_view(), name='list_alumni'),
+    path('alumni/<int:pk>/', AlumniDetailView.as_view(), name='detail_alumni'),
+    path('alumni/tambah/', AlumniCreateView.as_view(), name='add_alumni'),
+    path('alumni/<int:pk>/edit/', AlumniUpdateView.as_view(), name='edit_alumni'),
+    path('alumni/<int:pk>/hapus/', AlumniDeleteView.as_view(), name='delete_alumni'),
 ]

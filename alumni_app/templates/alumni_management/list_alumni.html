@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Alumni</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
@@ -19,7 +21,7 @@
 
         .container {
             width: 90%;
-            max-width: 800px;
+            max-width: 1000px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
@@ -43,6 +45,7 @@
         h2 {
             font-size: 2rem;
             font-weight: 700;
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -55,6 +58,7 @@
             border-radius: 8px;
             transition: all 0.4s ease-in-out;
             box-shadow: 0 0 10px rgba(255, 94, 98, 0.7);
+            margin: 5px;
         }
 
         .btn:hover {
@@ -62,23 +66,39 @@
             box-shadow: 0 0 15px rgba(255, 94, 98, 0.9);
         }
 
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            backdrop-filter: blur(12px); /* Tetap gunakan efek blur */
+            table-layout: fixed;
+            min-width: 800px;
         }
 
         th, td {
-            padding: 10px;
+            padding: 12px 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: left;
-            background: transparent; /* Pastikan background transparan */
+            background: transparent;
+            vertical-align: middle;
+            word-wrap: break-word;
         }
 
         th {
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.2); /* Opsi jika tetap ingin header berbeda */
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        td {
+            line-height: 1.4em;
+        }
+
+        td a {
+            display: inline-block;
+            margin: 2px 0;
         }
 
         a {
@@ -92,13 +112,29 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 15px;
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 16px;
             }
 
             table, th, td {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
             }
         }
     </style>
@@ -108,31 +144,35 @@
         <h2>Daftar Alumni</h2>
         <a href="{% url 'add_alumni' %}" class="btn">Tambah Alumni</a>
         <a href="{% url 'home' %}" class="btn">Home</a>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Graduation Year</th>
-                <th>Major</th>
-                <th>Job Position</th>
-                <th>Company</th>
-                <th>Action</th>
-            </tr>
-            {% for alumni in alumni_list %}
-            <tr>
-                <td>{{ alumni.name }}</td>
-                <td>{{ alumni.email }}</td>
-                <td>{{ alumni.graduation_year }}</td>
-                <td>{{ alumni.major }}</td>
-                <td>{{ alumni.job_position }}</td>
-                <td>{{ alumni.company }}</td>
-                <td>
-                    <a href="{% url 'edit_alumni' alumni.id %}">Edit</a> |
-                    <a href="{% url 'delete_alumni' alumni.id %}">Hapus</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Graduation Year</th>
+                    <th>Major</th>
+                    <th>Job Position</th>
+                    <th>Company</th>
+                    <th>Action</th>
+                </tr>
+                {% for alumni in alumni_list %}
+                <tr>
+                    <td>{{ alumni.name }}</td>
+                    <td>{{ alumni.email }}</td>
+                    <td>{{ alumni.graduation_year }}</td>
+                    <td>{{ alumni.major }}</td>
+                    <td>{{ alumni.job_position }}</td>
+                    <td>{{ alumni.company }}</td>
+                    <td>
+                        <a href="{% url 'detail_alumni' alumni.id %}">Detail</a> |
+                        <a href="{% url 'edit_alumni' alumni.id %}">Edit</a> |
+                        <a href="{% url 'delete_alumni' alumni.id %}">Hapus</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </body>
 </html>
