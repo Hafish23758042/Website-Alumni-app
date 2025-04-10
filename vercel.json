@@ -1,4 +1,9 @@
 {
+    "build": {
+      "env": {
+        "PYTHON_VERSION": "3.11"
+      }
+    },
     "builds": [
       {
         "src": "api/index.py",
